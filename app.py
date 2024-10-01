@@ -10,8 +10,8 @@ def index():
     if request.method == "POST":
         total_area = request.form.get("total_area")
         floor = request.form.get("floor")
-        cost = process(float(total_area),float(floor))
-        message = f"Стоимость недвижимости {cost}"
+        price = process(float(total_area),float(floor))
+        message = f"Стоимость недвижимости {price}"
     return render_template("index.html", message=message)
 
 
