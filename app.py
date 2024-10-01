@@ -11,7 +11,9 @@ def index():
         total_area = request.form.get("total_area")
         floor = request.form.get("floor")
         min_to_metro = request.form.get("min_to_metro")
-        price = process(float(total_area),float(floor),float(min_to_metro))
+        construction_year = request.form.get("construction_year")
+        number_of_rooms = request.form.get("number_of_rooms")
+        price = process(float(total_area),float(floor),int(min_to_metro),int(construction_year),int(number_of_rooms))
         message = f"Стоимость недвижимости {price}"
     return render_template("index.html", message=message)
 
