@@ -14,7 +14,9 @@ def index():
         construction_year = request.form.get("construction_year")
         number_of_rooms = request.form.get("number_of_rooms")
         ceiling_height = request.form.get("ceiling_height")
-        price = process(float(total_area),float(floor),int(min_to_metro),int(construction_year),int(number_of_rooms),float(ceiling_height))
+        price = process(float(total_area), float(floor), int(min_to_metro),
+                        int(construction_year), int(number_of_rooms),float(ceiling_height))
+
         message = f"Стоимость недвижимости {price}"
     return render_template("index.html", message=message)
 
