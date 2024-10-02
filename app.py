@@ -2,8 +2,6 @@ from flask import Flask, render_template, request
 
 from processingS import process
 
-
-
 app = Flask(__name__)
 
 @app.route('/', methods=["get", "post"])
