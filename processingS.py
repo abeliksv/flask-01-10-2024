@@ -1,4 +1,3 @@
-import pandas as pd
 import numpy as np
 import joblib
 
@@ -12,6 +11,6 @@ def process(total_area, floor, min_to_metro, construction_year, number_of_rooms,
 
     price  = loaded_LR.predict(x).astype(int)
     price  = price[0,0] #убираем квадратные скобки из выводимого сообщения
-    price = round(price/1000000, 3) # переводим стоимость в млн.
+    price = round(price/1000000, 3) # переводим стоимость в млн. и округляем до 3-х знаков
 
     return price
