@@ -17,7 +17,7 @@ def index():
         price = process(float(total_area), float(floor), int(min_to_metro),
                         int(construction_year), int(number_of_rooms),float(ceiling_height))
 
-        message = f"Стоимость недвижимости {price}"
+        message = f"Стоимость недвижимости {price} млн.руб."
     return render_template("index.html", message=message)
 
 
