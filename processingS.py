@@ -1,16 +1,20 @@
-import numpy as np
+# import numpy as np
+import pandas as pd
 import joblib
+import warnings
 
-def process(total_area, floor, min_to_metro, construction_year, number_of_rooms,ceiling_height):
+def process(data):
+    # Преобразуем словарь в DataFrame
+    data_df = pd.DataFrame([data])
 
-    # формируем вектор для predict
-    x = np.array([min_to_metro,total_area,floor,construction_year,ceiling_height,number_of_rooms]).reshape(1, -1)
-
-    # Load the saved model from a file LR_model.joblib
+    # Загружаем обученную модель
     loaded_LR = joblib.load('LR_model.joblib')
 
-    price  = loaded_LR.predict(x).astype(int)
-    price  = price[0,0] #убираем квадратные скобки из выводимого сообщения
-    price = round(price/1000000, 3) # переводим стоимость в млн. и округляем до 3-х знаков
+    # Предсказываем стоимость
+    price = loaded_LR.predict(data_df).astype(int)
+
+    # Убираем квадратные скобки и переводим стоимость в миллионы
+    price = price[0,0]  # результат будет одномерным массивом
+    price = round(price / 1_000_000, 3)
 
     return price
