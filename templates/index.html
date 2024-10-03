@@ -57,44 +57,44 @@
 </head>
 
 <body>
-  <h1>
+<h1>
     Калькулятор стоимости недвижимости
-  </h1>
+</h1>
 
 <form method="post">
     <p>
-    <label>Площадь квартиры</label>
-    <input type="text" name="total_area" value="{{ total_area }}">
+        <label>Площадь квартиры</label>
+        <input type="text" name="total_area" value="{{ total_area }}">
     </p>
     <p>
-    <label>Этаж </label>
-    <input type="text" name="floor" value="{{ floor }}">
+        <label>Этаж </label>
+        <input type="text" name="floor" value="{{ floor }}">
     </p>
     <p>
-    <label>Минут до метро </label>
-    <input type="text" name="min_to_metro" value="{{ min_to_metro }}">
+        <label>Минут до метро</label>
+        <input type="text" name="min_to_metro" value="{{ min_to_metro }}">
     </p>
     <p>
-    <label>Год постройки </label>
-    <input type="text" name="construction_year" value="{{ construction_year }}">
+        <label>Год постройки</label>
+        <input type="text" name="construction_year" value="{{ construction_year }}">
     </p>
     <p>
-    <label>Количество комнат </label>
-    <input type="text" name="number_of_rooms" value="{{ number_of_rooms }}">
+        <label>Количество комнат</label>
+        <input type="text" name="number_of_rooms" value="{{ number_of_rooms }}">
     </p>
     <p>
-    <label>Высота потолков </label>
-    <input type="text" name="ceiling_height" value="{{ ceiling_height }}">
+        <label>Высота потолков</label>
+        <input type="text" name="ceiling_height" value="{{ ceiling_height }}">
     </p>
     <p>
-    <input type="submit" value="Рассчитать">
+        <input type="submit" value="Рассчитать стоимость">
     </p>
 </form>
 
 <p>
-{% if message %}
+    {% if message %}
     {{ message }}
-{% endif %}
+    {% endif %}
 </p>
 
 </body>
