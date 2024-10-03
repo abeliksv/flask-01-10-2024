@@ -38,7 +38,7 @@ def index():
         price = process(data)
 
         # Сообщение с результатом расчета
-        message = f"Стоимость недвижимости {price} млн. руб."
+        message = f"Стоимость недвижимости {price} млн. рублей"
 
     # Передаем все переменные в шаблон для отображения
     return render_template("index.html",
