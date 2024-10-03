@@ -4,91 +4,122 @@
     <meta charset="UTF-8">
     <title>Калькулятор стоимости недвижимости</title>
     <style>
+        /* Основные стили */
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Roboto', sans-serif;
             max-width: 600px;
             margin: 0 auto;
             padding: 20px;
-            background-color: #f5f5f5;
+            background-color: #f3f4f6;
+            color: #333;
+            line-height: 1.6;
         }
+
         h1 {
             text-align: center;
-            margin-bottom: 30px;
+            font-size: 28px;
+            color: #2c3e50;
+            margin-bottom: 40px;
         }
+
         form {
             display: flex;
             flex-wrap: wrap;
-            margin: 0 -10px;
+            gap: 20px;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
-        form p {
-            flex-basis: 100%;
-            margin: 10px 0;
-        }
+
         form label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
+            font-size: 14px;
+            margin-bottom: 6px;
+            color: #34495e;
         }
+
         form input[type="text"] {
             width: 100%;
-            padding: 5px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
+            padding: 12px 15px;
+            border: 1px solid #dfe6e9;
+            border-radius: 8px;
+            font-size: 16px;
+            background-color: #f9f9f9;
+            transition: border-color 0.3s ease;
         }
+
+        form input[type="text"]:focus {
+            border-color: #3498db;
+            outline: none;
+            background-color: #ffffff;
+        }
+
         form input[type="submit"] {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 20px;
+            background-color: #3498db;
+            color: #fff;
+            padding: 12px 20px;
             border: none;
-            border-radius: 4px;
+            border-radius: 8px;
             cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
             margin-top: 20px;
+            width: 100%;
         }
+
         form input[type="submit"]:hover {
-            background-color: #3e8e41;
+            background-color: #2980b9;
         }
+
         p {
-            margin-top: 20px;
+            text-align: center;
             font-size: 18px;
-            color: #333;
+            color: #34495e;
+            margin-top: 20px;
+        }
+
+        /* Стили для адаптивности */
+        @media (min-width: 768px) {
+            form input[type="text"] {
+                flex-basis: calc(50% - 20px);
+            }
+
+            form input[type="submit"] {
+                flex-basis: 100%;
+            }
         }
     </style>
 </head>
-
 <body>
-<h1>
-    Калькулятор стоимости недвижимости
-</h1>
+
+<h1>Калькулятор стоимости недвижимости</h1>
 
 <form method="post">
-    <p>
+    <div>
         <label>Площадь квартиры</label>
         <input type="text" name="total_area" value="{{ total_area }}">
-    </p>
-    <p>
+    </div>
+    <div>
         <label>Этаж </label>
         <input type="text" name="floor" value="{{ floor }}">
-    </p>
-    <p>
+    </div>
+    <div>
         <label>Минут до метро</label>
         <input type="text" name="min_to_metro" value="{{ min_to_metro }}">
-    </p>
-    <p>
+    </div>
+    <div>
         <label>Год постройки</label>
         <input type="text" name="construction_year" value="{{ construction_year }}">
-    </p>
-    <p>
+    </div>
+    <div>
         <label>Количество комнат</label>
         <input type="text" name="number_of_rooms" value="{{ number_of_rooms }}">
-    </p>
-    <p>
+    </div>
+    <div>
         <label>Высота потолков</label>
         <input type="text" name="ceiling_height" value="{{ ceiling_height }}">
-    </p>
-    <p>
-        <input type="submit" value="Рассчитать стоимость">
-    </p>
+    </div>
+    <input type="submit" value="Рассчитать стоимость">
 </form>
 
 <p>
