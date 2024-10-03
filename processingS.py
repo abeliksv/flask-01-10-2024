@@ -2,6 +2,7 @@ import pandas as pd
 import joblib
 import warnings
 
+
 def process(data):
     # Преобразуем словарь в DataFrame
     data_df = pd.DataFrame([data])
