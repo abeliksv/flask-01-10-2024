@@ -98,26 +98,25 @@
             let numberOfRooms = document.forms["propertyForm"]["number_of_rooms"].value;
             let ceilingHeight = document.forms["propertyForm"]["ceiling_height"].value;
 
-            let currentYear = new Date().getFullYear();
             let errors = [];
 
-            if (isNaN(totalArea) || totalArea <= 0) {
-                errors.push("Площадь должна быть положительным числом.");
+            if (isNaN(totalArea) || totalArea <= 0 || totalArea > 320) {
+                errors.push("Площадь должна быть положительным числом, не более 320 м.кв.");
             }
-            if (isNaN(floor) || floor <= 0) {
-                errors.push("Этаж должен быть положительным числом.");
+            if (isNaN(floor) || floor <= 0 || floor > 85) {
+                errors.push("Этаж должен быть положительным числом, не более 85.");
             }
-            if (isNaN(minToMetro) || minToMetro < 0) {
-                errors.push("Время до метро должно быть числом не меньше 0.");
+            if (isNaN(minToMetro) || minToMetro < 0 || minToMetro > 30 ) {
+                errors.push("Время до метро должно быть числом не меньше 0 и е более 30 минут(ограниченсие модели)".);
             }
-            if (isNaN(constructionYear) || constructionYear < 1800 || constructionYear > currentYear) {
-                errors.push("Год постройки должен быть между 1800 и текущим годом.");
+            if (isNaN(constructionYear) || constructionYear < 1800 || constructionYear > 2030) {
+                errors.push("Год постройки должен быть между 1800 и 2030 годом.");
             }
-            if (isNaN(numberOfRooms) || numberOfRooms <= 0) {
-                errors.push("Количество комнат должно быть положительным числом.");
+            if (isNaN(numberOfRooms) || numberOfRooms <= 0 || numberOfRooms > 3) {
+                errors.push("Количество комнат должно быть положительным числом не болле 3");
             }
-            if (isNaN(ceilingHeight) || ceilingHeight <= 0) {
-                errors.push("Высота потолков должна быть положительным числом.");
+            if (isNaN(ceilingHeight) || ceilingHeight <= 0 ||ceilingHeight > 6) {
+                errors.push("Высота потолков должна быть положительным числом не более 6.0");
             }
 
             if (errors.length > 0) {
