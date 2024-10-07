@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Адаптивный мета-тег -->
     <title>Калькулятор стоимости недвижимости</title>
     <style>
         /* Основные стили */
@@ -24,7 +25,7 @@
 
         form {
             display: flex;
-            flex-wrap: wrap;
+            flex-direction: column; /* Упрощаем для мобильных устройств */
             gap: 10px;
             background-color: #fff;
             padding: 20px;
@@ -33,7 +34,7 @@
         }
 
         form div {
-            width: 85%;
+            width: 100%; /* Ширина 100% для мобильных */
         }
 
         form label {
@@ -68,8 +69,7 @@
             font-size: 16px;
             transition: background-color 0.3s ease;
             margin-top: 20px;
-            margin-left: 60px;
-            width: 75%;
+            width: 100%; /* Ширина 100% для кнопки */
         }
 
         form input[type="submit"]:hover {
@@ -82,15 +82,37 @@
             color: #34495e;
             margin-top: 15px;
         }
+
+        .error-message {
+            color: red;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+        /* Медиа-запросы для больших экранов */
+        @media (min-width: 600px) {
+            form {
+                flex-direction: row; /* Изменяем направление на больших экранах */
+                flex-wrap: wrap;
+            }
+
+            form div {
+                width: 45%; /* Уменьшаем ширину на больших экранах */
+            }
+
+            form input[type="submit"] {
+                width: auto; /* Кнопка не занимает всю ширину */
+                margin-left: auto; /* Центрируем кнопку */
+                margin-right: auto;
+            }
+        }
     </style>
-
-
 </head>
 <body>
 
 <h1>Калькулятор стоимости недвижимости</h1>
 
-<form name="propertyForm" method="post" >
+<form name="propertyForm" method="post">
     <div>
         <label>Площадь квартиры (кв. м)</label>
         <input type="text" name="total_area" value="{{ total_area }}" required>
