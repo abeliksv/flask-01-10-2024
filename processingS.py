@@ -1,6 +1,6 @@
 import pandas as pd
 import joblib
-import warnings
+
 
 
 def process(data):
@@ -8,10 +8,11 @@ def process(data):
     data_df = pd.DataFrame([data])
 
     # Загружаем обученную модель
-    loaded_LR = joblib.load('RF_model.joblib')
+    # loaded_model = joblib.load('RF_model.joblib')
+    loaded_model = joblib.load('LR_model.joblib')
 
     # Предсказываем стоимость
-    price = loaded_LR.predict(data_df).astype(int)
+    price = loaded_model.predict(data_df).astype(int)
 
     # Убираем квадратные скобки и переводим стоимость в миллионы
     price = price[0]  # результат будет одномерным массивом
