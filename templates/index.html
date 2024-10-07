@@ -82,57 +82,15 @@
             color: #34495e;
             margin-top: 15px;
         }
-
-        .error-message {
-            color: red;
-            font-size: 14px;
-        }
     </style>
 
-    <script>
-        function validateForm() {
-            let totalArea = document.forms["propertyForm"]["total_area"].value;
-            let floor = document.forms["propertyForm"]["floor"].value;
-            let minToMetro = document.forms["propertyForm"]["min_to_metro"].value;
-            let constructionYear = document.forms["propertyForm"]["construction_year"].value;
-            let numberOfRooms = document.forms["propertyForm"]["number_of_rooms"].value;
-            let ceilingHeight = document.forms["propertyForm"]["ceiling_height"].value;
 
-            let errors = [];
-
-            if (isNaN(totalArea) || totalArea <= 0 || totalArea > 320) {
-                errors.push("Площадь должна быть положительным числом, не более 320 м.кв.");
-            }
-            if (isNaN(floor) || floor <= 0 || floor > 85) {
-                errors.push("Этаж должен быть положительным числом, не более 85.");
-            }
-            if (isNaN(minToMetro) || minToMetro < 0 || minToMetro > 30 ) {
-                errors.push("Время до метро должно быть числом не меньше 0 и е более 30 минут(ограниченсие модели)".);
-            }
-            if (isNaN(constructionYear) || constructionYear < 1800 || constructionYear > 2030) {
-                errors.push("Год постройки должен быть между 1800 и 2030 годом.");
-            }
-            if (isNaN(numberOfRooms) || numberOfRooms <= 0 || numberOfRooms > 3) {
-                errors.push("Количество комнат должно быть положительным числом не болле 3");
-            }
-            if (isNaN(ceilingHeight) || ceilingHeight <= 0 ||ceilingHeight > 6) {
-                errors.push("Высота потолков должна быть положительным числом не более 6.0");
-            }
-
-            if (errors.length > 0) {
-                document.getElementById("errorMessages").innerHTML = errors.join("<br>");
-                return false;
-            }
-
-            return true;
-        }
-    </script>
 </head>
 <body>
 
 <h1>Калькулятор стоимости недвижимости</h1>
 
-<form name="propertyForm" method="post" onsubmit="return validateForm()">
+<form name="propertyForm" method="post" >
     <div>
         <label>Площадь квартиры (кв. м)</label>
         <input type="text" name="total_area" value="{{ total_area }}" required>
