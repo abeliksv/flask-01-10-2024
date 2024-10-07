@@ -32,5 +32,6 @@ def process(scaled_data):
     loaded_model = joblib.load('models/LR_model_scaled.joblib')
     # Предсказываем стоимость
     scaled_price = loaded_model.predict(data_df)
-    price = min_max_scaler_y.inverse_transform(scaled_price)[0][0]
+    price = min_max_scaler_y.inverse_transform([scaled_price]).squeeze()
+    # Убираем квадратные скобки squeeze()
     return price

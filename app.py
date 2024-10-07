@@ -44,7 +44,6 @@ def index():
         price = process(scaled_data)
         price = round(price/1000000, 3)
 
-
         # Сообщение с результатом расчета
         message = f"Стоимость недвижимости {price} млн. рублей"
 
