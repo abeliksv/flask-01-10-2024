@@ -56,13 +56,6 @@ def index():
                     'ceiling_height': [ceiling_height],
                     'number_of_rooms': [number_of_rooms]
                 })
-                # data = np.array([[min_to_metro],
-                #                  [total_area],
-                #                  [floor],
-                #                  [construction_year],
-                #                  [ceiling_height],
-                #                  [number_of_rooms]])
-                # data = data.reshape(1, -1)
 
                 # Обрабатываем данные
                 scaled_data = preprocess(data)
