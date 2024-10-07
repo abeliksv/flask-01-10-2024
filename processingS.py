@@ -5,7 +5,6 @@ import joblib
 def preprocess(data):
     try:
         min_max_scaler_x = joblib.load('./models/min_max_scaler_x.joblib')
-        print("Scaler_x loaded successfully.")
     except FileNotFoundError:
         print("Error: Joblib file min_max_scaler_x.joblib not found.")
         return None
@@ -19,7 +18,6 @@ def preprocess(data):
 def process(scaled_data):
     try:
         min_max_scaler_y = joblib.load('./models/min_max_scaler_y.joblib')
-        print("Scaler_y loaded successfully.")
     except FileNotFoundError:
         print("Error: Joblib file min_max_scaler_y.joblib not found.")
         return None

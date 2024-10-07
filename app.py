@@ -1,6 +1,6 @@
-import numpy as np
 from flask import Flask, render_template, request
 from processingS import process, preprocess
+import pandas as pd
 
 app = Flask(__name__)
 
@@ -47,13 +47,22 @@ def index():
             if errors:
                 message = "<br>".join(errors)
             else:
-                data = np.array([[min_to_metro],
-                                 [total_area],
-                                 [floor],
-                                 [construction_year],
-                                 [ceiling_height],
-                                 [number_of_rooms]])
-                data = data.reshape(1, -1)
+                # Создание DataFrame
+                data = pd.DataFrame({
+                    'min_to_metro': [min_to_metro],
+                    'total_area': [total_area],
+                    'floor': [floor],
+                    'construction_year': [construction_year],
+                    'ceiling_height': [ceiling_height],
+                    'number_of_rooms': [number_of_rooms]
+                })
+                # data = np.array([[min_to_metro],
+                #                  [total_area],
+                #                  [floor],
+                #                  [construction_year],
+                #                  [ceiling_height],
+                #                  [number_of_rooms]])
+                # data = data.reshape(1, -1)
 
                 # Обрабатываем данные
                 scaled_data = preprocess(data)
