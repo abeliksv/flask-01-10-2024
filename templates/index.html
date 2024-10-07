@@ -33,7 +33,7 @@
         }
 
         form div {
-            width: 85%; /* Все поля ввода будут занимать одинаковую ширину */
+            width: 85%;
         }
 
         form label {
@@ -42,8 +42,8 @@
             color: #34495e;
         }
 
-        form input[type="text"] {
-            width: 100%; /* Устанавливаем одинаковую ширину для всех полей ввода */
+        form input[type="text"], form input[type="number"] {
+            width: 100%;
             padding: 12px 15px;
             border: 1px solid #dfe6e9;
             border-radius: 8px;
@@ -52,7 +52,7 @@
             transition: border-color 0.3s ease;
         }
 
-        form input[type="text"]:focus {
+        form input[type="text"]:focus, form input[type="number"]:focus {
             border-color: #3498db;
             outline: none;
             background-color: #ffffff;
@@ -70,7 +70,6 @@
             margin-top: 20px;
             margin-left: 60px;
             width: 75%;
-
         }
 
         form input[type="submit"]:hover {
@@ -83,37 +82,83 @@
             color: #34495e;
             margin-top: 20px;
         }
+
+        .error-message {
+            color: red;
+            font-size: 16px;
+        }
     </style>
+
+    <script>
+        function validateForm() {
+            let totalArea = document.forms["propertyForm"]["total_area"].value;
+            let floor = document.forms["propertyForm"]["floor"].value;
+            let minToMetro = document.forms["propertyForm"]["min_to_metro"].value;
+            let constructionYear = document.forms["propertyForm"]["construction_year"].value;
+            let numberOfRooms = document.forms["propertyForm"]["number_of_rooms"].value;
+            let ceilingHeight = document.forms["propertyForm"]["ceiling_height"].value;
+
+            let currentYear = new Date().getFullYear();
+            let errors = [];
+
+            if (isNaN(totalArea) || totalArea <= 0) {
+                errors.push("Площадь должна быть положительным числом.");
+            }
+            if (isNaN(floor) || floor <= 0) {
+                errors.push("Этаж должен быть положительным числом.");
+            }
+            if (isNaN(minToMetro) || minToMetro < 0) {
+                errors.push("Время до метро должно быть числом не меньше 0.");
+            }
+            if (isNaN(constructionYear) || constructionYear < 1800 || constructionYear > currentYear) {
+                errors.push("Год постройки должен быть между 1800 и текущим годом.");
+            }
+            if (isNaN(numberOfRooms) || numberOfRooms <= 0) {
+                errors.push("Количество комнат должно быть положительным числом.");
+            }
+            if (isNaN(ceilingHeight) || ceilingHeight <= 0) {
+                errors.push("Высота потолков должна быть положительным числом.");
+            }
+
+            if (errors.length > 0) {
+                document.getElementById("errorMessages").innerHTML = errors.join("<br>");
+                return false;
+            }
+
+            return true;
+        }
+    </script>
 </head>
 <body>
 
 <h1>Калькулятор стоимости недвижимости</h1>
 
-<form method="post">
+<form name="propertyForm" method="post" onsubmit="return validateForm()">
     <div>
-        <label>Площадь квартиры</label>
-        <input type="text" name="total_area" value="{{ total_area }}">
+        <label>Площадь квартиры (кв. м)</label>
+        <input type="text" name="total_area" value="{{ total_area }}" required>
     </div>
     <div>
-        <label>Этаж </label>
-        <input type="text" name="floor" value="{{ floor }}">
+        <label>Этаж</label>
+        <input type="text" name="floor" value="{{ floor }}" required>
     </div>
     <div>
         <label>Минут до метро</label>
-        <input type="text" name="min_to_metro" value="{{ min_to_metro }}">
+        <input type="text" name="min_to_metro" value="{{ min_to_metro }}" required>
     </div>
     <div>
         <label>Год постройки</label>
-        <input type="text" name="construction_year" value="{{ construction_year }}">
+        <input type="text" name="construction_year" value="{{ construction_year }}" required>
     </div>
     <div>
         <label>Количество комнат</label>
-        <input type="text" name="number_of_rooms" value="{{ number_of_rooms }}">
+        <input type="text" name="number_of_rooms" value="{{ number_of_rooms }}" required>
     </div>
     <div>
-        <label>Высота потолков</label>
-        <input type="text" name="ceiling_height" value="{{ ceiling_height }}">
+        <label>Высота потолков (м)</label>
+        <input type="text" name="ceiling_height" value="{{ ceiling_height }}" required>
     </div>
+    <div id="errorMessages" class="error-message"></div>
     <input type="submit" value="Рассчитать стоимость">
 </form>
 
