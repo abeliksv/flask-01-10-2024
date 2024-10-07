@@ -1,26 +1,35 @@
 import pandas as pd
-import numpy as np
 import joblib
 
 
-def process(data):
-    # Преобразуем словарь в DataFrame
-    data_df = pd.DataFrame([data])
+def preprocess(data):
+    try:
+        min_max_scaler_x = joblib.load('./models/min_max_scaler_x.joblib')
+    except FileNotFoundError:
+        print("Error: Joblib file min_max_scaler_x.joblib not found.")
+        return None
+    except Exception as e:
+        print(f"An error_x occurred: {e}")
+        return None
+    scaled_data = min_max_scaler_x.transform(data)
+    return scaled_data
 
+
+def process(scaled_data):
+    try:
+        min_max_scaler_y = joblib.load('./models/min_max_scaler_y.joblib')
+    except FileNotFoundError:
+        print("Error: Joblib file min_max_scaler_y.joblib not found.")
+        return None
+    except Exception as e:
+        print(f"An error_y occurred: {e}")
+        return None
+    # Преобразуем в DataFrame
+    data_df = pd.DataFrame(scaled_data)
     # Загружаем обученную модель
-    # loaded_model = joblib.load('RF_model.joblib')
-    loaded_model = joblib.load('LR_model.joblib')
-
+    loaded_model = joblib.load('models/LR_model_scaled.joblib')
     # Предсказываем стоимость
-    price = loaded_model.predict(data_df).astype(int)
-
-    # Убираем квадратные скобки
-    price = price[0, 0]  # результат будет одномерным массивом
-
-    # применять при загрузке RF_model.joblib
-    # price = round(price / 1_000_000, 3)
-    # price = price[0]  # результат будет одномерным массивом
-    # преводим стоимость в млн. руб.
-    price = np.round(price / 1_000_000, 3)
-
+    scaled_price = loaded_model.predict(data_df)
+    price = min_max_scaler_y.inverse_transform([scaled_price]).squeeze()
+    # Убираем квадратные скобки squeeze()
     return price

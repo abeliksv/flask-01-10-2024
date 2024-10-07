@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Адаптивный мета-тег -->
     <title>Калькулятор стоимости недвижимости</title>
     <style>
         /* Основные стили */
@@ -12,42 +13,42 @@
             padding: 20px;
             background-color: #f3f4f6;
             color: #333;
-            line-height: 1.6;
+            line-height: 1.4;
         }
 
         h1 {
             text-align: center;
-            font-size: 28px;
+            font-size: 24px;
             color: #2c3e50;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
         }
 
         form {
             display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
+            flex-direction: column; /* Упрощаем для мобильных устройств */
+            gap: 10px;
             background-color: #fff;
-            padding: 40px;
+            padding: 20px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
         form div {
-            width: 85%;
+            width: 100%; /* Ширина 100% для мобильных */
         }
 
         form label {
-            font-size: 14px;
+            font-size: 12px;
             margin-bottom: 6px;
             color: #34495e;
         }
 
         form input[type="text"], form input[type="number"] {
             width: 100%;
-            padding: 12px 15px;
+            padding: 8px 12px;
             border: 1px solid #dfe6e9;
             border-radius: 8px;
-            font-size: 16px;
+            font-size: 14px;
             background-color: #f9f9f9;
             transition: border-color 0.3s ease;
         }
@@ -68,8 +69,7 @@
             font-size: 16px;
             transition: background-color 0.3s ease;
             margin-top: 20px;
-            margin-left: 60px;
-            width: 75%;
+            width: 100%; /* Ширина 100% для кнопки */
         }
 
         form input[type="submit"]:hover {
@@ -78,62 +78,41 @@
 
         p {
             text-align: center;
-            font-size: 20px;
+            font-size: 15px;
             color: #34495e;
-            margin-top: 20px;
+            margin-top: 15px;
         }
 
         .error-message {
             color: red;
-            font-size: 16px;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+        /* Медиа-запросы для больших экранов */
+        @media (min-width: 600px) {
+            form {
+                flex-direction: row; /* Изменяем направление на больших экранах */
+                flex-wrap: wrap;
+            }
+
+            form div {
+                width: 45%; /* Уменьшаем ширину на больших экранах */
+            }
+
+            form input[type="submit"] {
+                width: auto; /* Кнопка не занимает всю ширину */
+                margin-left: auto; /* Центрируем кнопку */
+                margin-right: auto;
+            }
         }
     </style>
-
-    <script>
-        function validateForm() {
-            let totalArea = document.forms["propertyForm"]["total_area"].value;
-            let floor = document.forms["propertyForm"]["floor"].value;
-            let minToMetro = document.forms["propertyForm"]["min_to_metro"].value;
-            let constructionYear = document.forms["propertyForm"]["construction_year"].value;
-            let numberOfRooms = document.forms["propertyForm"]["number_of_rooms"].value;
-            let ceilingHeight = document.forms["propertyForm"]["ceiling_height"].value;
-
-            let currentYear = new Date().getFullYear();
-            let errors = [];
-
-            if (isNaN(totalArea) || totalArea <= 0) {
-                errors.push("Площадь должна быть положительным числом.");
-            }
-            if (isNaN(floor) || floor <= 0) {
-                errors.push("Этаж должен быть положительным числом.");
-            }
-            if (isNaN(minToMetro) || minToMetro < 0) {
-                errors.push("Время до метро должно быть числом не меньше 0.");
-            }
-            if (isNaN(constructionYear) || constructionYear < 1800 || constructionYear > currentYear) {
-                errors.push("Год постройки должен быть между 1800 и текущим годом.");
-            }
-            if (isNaN(numberOfRooms) || numberOfRooms <= 0) {
-                errors.push("Количество комнат должно быть положительным числом.");
-            }
-            if (isNaN(ceilingHeight) || ceilingHeight <= 0) {
-                errors.push("Высота потолков должна быть положительным числом.");
-            }
-
-            if (errors.length > 0) {
-                document.getElementById("errorMessages").innerHTML = errors.join("<br>");
-                return false;
-            }
-
-            return true;
-        }
-    </script>
 </head>
 <body>
 
 <h1>Калькулятор стоимости недвижимости</h1>
 
-<form name="propertyForm" method="post" onsubmit="return validateForm()">
+<form name="propertyForm" method="post">
     <div>
         <label>Площадь квартиры (кв. м)</label>
         <input type="text" name="total_area" value="{{ total_area }}" required>
