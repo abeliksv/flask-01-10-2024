@@ -1,5 +1,6 @@
+import numpy as np
 from flask import Flask, render_template, request
-from processingS import process
+from processingS import process, preprocess
 
 app = Flask(__name__)
 
@@ -24,18 +25,25 @@ def index():
         number_of_rooms = request.form.get("number_of_rooms", 1)
         ceiling_height = request.form.get("ceiling_height", 2.7)
 
-        # Собираем данные в словарь
-        data = {
-            'min_to_metro': int(min_to_metro),
-            'total_area': float(total_area),
-            'floor': float(floor),
-            'construction_year': int(construction_year),
-            'ceiling_height': float(ceiling_height),
-            'number_of_rooms': int(number_of_rooms)
-        }
 
-        # Обрабатываем данные и считаем цену
-        price = process(data)
+        data = np.array([[min_to_metro],
+                         [total_area],
+                         [floor],
+                         [construction_year],
+                         [ceiling_height],
+                         [number_of_rooms]])
+        data = data.reshape(1,-1)
+
+        # Обрабатываем данные
+        scaled_data = preprocess(data)
+
+
+        # считаем цену
+
+
+        price = process(scaled_data)
+        price = round(price/1000000, 3)
+
 
         # Сообщение с результатом расчета
         message = f"Стоимость недвижимости {price} млн. рублей"
