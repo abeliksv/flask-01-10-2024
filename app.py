@@ -31,8 +31,8 @@ def index():
             ceiling_height = float(request.form.get("ceiling_height", 2.7))
 
             # Проверяем, что значения корректны
-            if total_area <= 0 or total_area > 320:
-                errors.append("Площадь должна быть положительным числом, не более 320 м.кв.")
+            if total_area < 9 or total_area > 320:
+                errors.append("Площадь должна быть положительным числом от 9 до 320 м.кв.")
             if floor <= 0 or floor > 85:
                 errors.append("Этаж должен быть положительным числом, не более 85.")
             if min_to_metro < 0 or min_to_metro > 30:
@@ -40,7 +40,7 @@ def index():
             if construction_year < 1800 or construction_year > 2030:
                 errors.append("Год постройки должен быть между 1800 и 2030 годом.")
             if number_of_rooms <= 0 or number_of_rooms > 3:
-                errors.append("Количество комнат должно быть положительным числом, не более 3.")
+                errors.append("Количество комнат должно быть положительным числом, не более 3 (ограничение модели).")
             if ceiling_height < 2.3 or ceiling_height > 6:
                 errors.append("Высота потолков должна быть в интервале от 2.30 до 6.0")
 

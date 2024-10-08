@@ -34,17 +34,17 @@
         }
 
         form div {
-            width: 100%; /* Ширина 100% для мобильных */
+            width: 90%; /* Ширина 90% для мобильных */
         }
 
         form label {
-            font-size: 12px;
+            font-size: 14px;
             margin-bottom: 6px;
             color: #34495e;
         }
 
         form input[type="text"], form input[type="number"] {
-            width: 100%;
+            width: 80%;
             padding: 8px 12px;
             border: 1px solid #dfe6e9;
             border-radius: 8px;
@@ -68,7 +68,7 @@
             cursor: pointer;
             font-size: 16px;
             transition: background-color 0.3s ease;
-            margin-top: 20px;
+            margin-top: 18px;
             width: 100%; /* Ширина 100% для кнопки */
         }
 
@@ -78,15 +78,9 @@
 
         p {
             text-align: center;
-            font-size: 15px;
+            font-size: 18px;
             color: #34495e;
             margin-top: 15px;
-        }
-
-        .error-message {
-            color: red;
-            font-size: 14px;
-            margin-top: 10px;
         }
 
         /* Медиа-запросы для больших экранов */
@@ -97,20 +91,19 @@
             }
 
             form div {
-                width: 45%; /* Уменьшаем ширину на больших экранах */
+                width: 40%; /* Уменьшаем ширину на больших экранах */
             }
 
             form input[type="submit"] {
-                width: auto; /* Кнопка не занимает всю ширину */
-                margin-left: auto; /* Центрируем кнопку */
-                margin-right: auto;
+                width: 100%; /* Кнопка не занимает всю ширину */
+
             }
         }
     </style>
 </head>
 <body>
 
-<h1>Калькулятор стоимости недвижимости</h1>
+<h1>Калькулятор стоимости квартир</h1>
 
 <form name="propertyForm" method="post">
     <div>
@@ -118,16 +111,8 @@
         <input type="text" name="total_area" value="{{ total_area }}" required>
     </div>
     <div>
-        <label>Этаж</label>
+        <label>Этаж (от 1 до 85)</label>
         <input type="text" name="floor" value="{{ floor }}" required>
-    </div>
-    <div>
-        <label>Минут до метро</label>
-        <input type="text" name="min_to_metro" value="{{ min_to_metro }}" required>
-    </div>
-    <div>
-        <label>Год постройки</label>
-        <input type="text" name="construction_year" value="{{ construction_year }}" required>
     </div>
     <div>
         <label>Количество комнат</label>
@@ -137,7 +122,16 @@
         <label>Высота потолков (м)</label>
         <input type="text" name="ceiling_height" value="{{ ceiling_height }}" required>
     </div>
-    <div id="errorMessages" class="error-message"></div>
+    <div>
+        <label>Минут до метро</label>
+        <input type="text" name="min_to_metro" value="{{ min_to_metro }}" required>
+    </div>
+    <div>
+        <label>Год постройки</label>
+        <input type="text" name="construction_year" value="{{ construction_year }}" required>
+    </div>
+
+
     <input type="submit" value="Рассчитать стоимость">
 </form>
 
